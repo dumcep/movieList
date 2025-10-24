@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# 🍿 movieList Movie App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Deployed on Vercel](https://movie-list-zeta-seven.vercel.app/)]
 
-## Available Scripts
+An interactive movie search application where you can find films, see their details, and curate a personal list of "watched" movies with your own ratings.
 
-In the project directory, you can run:
+This project was built as a hands-on exercise to apply and solidify core React concepts, from state management with hooks to handling asynchronous data fetching and component lifecycles.
 
-### `npm start`
+![usePopcorn App Demo](./assets/usepopcorn-demo.gif)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Core Features
 
-### `npm test`
+* 🎬 **Live Movie Search:** Instantly search the OMDB API for any movie as you type.
+* 📊 **Detailed Movie Info:** Click any movie to view its plot, actors, director, runtime, and IMDb rating.
+* ⭐ **Personal Rating System:** Add movies to your "watched" list and give them a personal star rating from 1 to 10.
+* 📈 **Watched List Summary:** Get an automatic summary of your watched movies, including the number of films, your average rating, and the average runtime.
+* 🗑️ **Manage Your List:** Easily remove movies from your watched list.
+* 🔄 **Clean UI States:** A smooth user experience with dedicated loading spinners and clear, descriptive error messages.
+* ⌨️ **Keyboard Navigation:** Press the `Escape` key to close the movie details panel.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Learning Focus & Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The primary goal of this project was to move from React theory to practice. The entire application is built on modern React principles.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* **React (v18+):** The core library for building the user interface.
+* **React Hooks:**
+    * `useState`: Used extensively to manage all component-level state, including the search query, movie results, selected movie ID, watched list, and all loading/error states.
+    * `useEffect`: The backbone for all side effects. This hook was used to:
+        * Fetch movie data from the API based on the `query` state.
+        * Fetch detailed data for a movie when the `selectedId` state changes.
+        * Update the document's title to the name of the selected movie for a better UX.
+        * Set up a global event listener (`keydown`) to close the movie details panel with the `Escape` key, complete with a proper cleanup function.
+* **Data Fetching:**
+    * Used the modern `fetch` API with `async/await` syntax for clean, readable asynchronous code.
+    * Implemented an `AbortController` within the `useEffect` hook to cancel pending `fetch` requests on every new keystroke. This prevents race conditions and ensures that only the results for the *latest* query are displayed.
+* **Component-Based Architecture:**
+    * Broke down the entire UI into small, reusable, and composable components (e.g., `NavBar`, `Search`, `MovieList`, `MovieDetails`, `WatchedSummary`).
+* **State Management & Prop Drilling:**
+    * Practiced lifting state up to the nearest common ancestor (`App` component) and passing data and event handlers down to child components via props.
+* **API Proxy (Vercel):**
+    * Set up a serverless function (`/api/movies`) to act as a proxy to the OMDB API. This hides the API key from the client-side, which is a crucial security best practice.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
