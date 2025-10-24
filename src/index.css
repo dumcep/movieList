@@ -54,8 +54,11 @@ body {
   max-width: 42rem;
   background-color: var(--color-background-500);
   border-radius: 0.9rem;
-  overflow: scroll;
   position: relative;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .loader {
@@ -139,10 +142,12 @@ body {
   list-style: none;
   padding: 0.8rem 0;
   overflow: scroll;
+
+  flex-grow: 1;
 }
 
 .list-watched {
-  height: calc(100% - 9rem);
+  /* height: calc(100% - 9rem); */
 }
 
 .list li {
