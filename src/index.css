@@ -166,7 +166,9 @@ body {
 .list.list-movies li:hover {
   background-color: var(--color-background-100);
 }
-
+.list-movies h3 {
+  overflow-wrap: break-word;
+}
 .list img {
   width: 100%;
   grid-row: 1 / -1;
@@ -257,6 +259,9 @@ body {
 
 .details img {
   width: 33%;
+}
+.details p {
+  overflow-wrap: break-word;
 }
 
 .details-overview {
