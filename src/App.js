@@ -237,16 +237,11 @@ function Movie({ movie, onSelectMovie, onCloseMovie }) {
     </li>
   );
 }
-function MovieDetails({
-  selectedId,
-  onCloseMovie,
-  onAddWatched,
-  watched,
-  onDelete,
-}) {
+function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
+
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
   const watchedUserRating = watched.find(
     (movie) => movie.imdbID === selectedId
@@ -256,7 +251,8 @@ function MovieDetails({
     async function getMovieDetails() {
       try {
         setIsLoading(true);
-        const res = await fetch(`/api/movies?s=${selectedId}`);
+
+        const res = await fetch(`/api/movies?i=${selectedId}`);
         const data = await res.json();
         if (data.Response === "False") throw new Error("Movie not found");
         setMovie(data);
@@ -266,10 +262,10 @@ function MovieDetails({
         setIsLoading(false);
       }
     }
-
     getMovieDetails();
   }, [selectedId]);
 
+  // Escape key effect
   useEffect(
     function () {
       function callback(e) {
@@ -277,9 +273,7 @@ function MovieDetails({
           onCloseMovie();
         }
       }
-
       document.addEventListener("keydown", callback);
-
       return function () {
         document.removeEventListener("keydown", callback);
       };
@@ -288,14 +282,16 @@ function MovieDetails({
   );
 
   useEffect(() => {
-    if (!title) return;
-    document.title = `Movie | ${title}`;
+    if (!movie.Title) return;
 
-    //Cleanup Function
+    document.title = `Movie | ${movie.Title}`;
+
+    // Cleanup Function
     return function () {
       document.title = "movieList";
     };
   }, [movie.Title]);
+
   if (isLoading) return <p className="loader">Loading movie details...</p>;
   if (!movie) return null;
 
