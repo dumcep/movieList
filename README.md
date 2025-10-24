@@ -2,6 +2,8 @@
 
 [![Deployed on Vercel](https://vercel.com/button)](https://movie-list-zeta-seven.vercel.app/)
 
+https://movie-list-zeta-seven.vercel.app/
+
 An interactive movie search application where you can find films, see their details, and curate a personal list of "watched" movies with your own ratings.
 
 This project was built as a hands-on exercise to apply and solidify core React concepts, from state management with hooks to handling asynchronous data fetching and component lifecycles.
